@@ -13,10 +13,24 @@ interface SmartBin {
 }
 
 const MOCK_BINS: SmartBin[] = [
-  { id: '1jb23cs192', lat: 12.9716, lng: 77.5946, fillLevel: 85, status: 'Online' }, // Needs pickup (red)
-  { id: '2jb23cs193', lat: 12.9720, lng: 77.5950, fillLevel: 45, status: 'Online' }, // Medium (yellow)
-  { id: '3jb23cs194', lat: 12.9710, lng: 77.5940, fillLevel: 10, status: 'Online' }, // Empty (green)
-  { id: '4jb23cs195', lat: 12.9730, lng: 77.5960, fillLevel: 95, status: 'Online' }, // Critical (red)
+  // Red (critical > 80)
+  { id: '1jb23cs192', lat: 12.9716, lng: 77.5946, fillLevel: 85, status: 'Online' },
+  { id: '4jb23cs195', lat: 12.9730, lng: 77.5960, fillLevel: 95, status: 'Online' },
+  { id: '7jb23cs198', lat: 12.9705, lng: 77.5920, fillLevel: 88, status: 'Online' },
+  { id: '9jb23cs200', lat: 12.9740, lng: 77.5910, fillLevel: 92, status: 'Online' },
+  // Yellow (medium > 40)
+  { id: '2jb23cs193', lat: 12.9720, lng: 77.5950, fillLevel: 45, status: 'Online' },
+  { id: '5jb23cs196', lat: 12.9710, lng: 77.5955, fillLevel: 60, status: 'Online' },
+  { id: '8jb23cs199', lat: 12.9725, lng: 77.5930, fillLevel: 75, status: 'Online' },
+  { id: '11jb23cs202', lat: 12.9695, lng: 77.5965, fillLevel: 55, status: 'Online' },
+  { id: '14jb23cs205', lat: 12.9735, lng: 77.5945, fillLevel: 65, status: 'Online' },
+  // Green (empty < 40)
+  { id: '3jb23cs194', lat: 12.9710, lng: 77.5940, fillLevel: 10, status: 'Online' },
+  { id: '6jb23cs197', lat: 12.9700, lng: 77.5935, fillLevel: 25, status: 'Online' },
+  { id: '10jb23cs201', lat: 12.9728, lng: 77.5925, fillLevel: 5, status: 'Online' },
+  { id: '12jb23cs203', lat: 12.9715, lng: 77.5915, fillLevel: 15, status: 'Online' },
+  { id: '13jb23cs204', lat: 12.9705, lng: 77.5970, fillLevel: 30, status: 'Online' },
+  { id: '15jb23cs206', lat: 12.9745, lng: 77.5955, fillLevel: 20, status: 'Online' },
 ];
 
 export function LiveHeatmap() {
