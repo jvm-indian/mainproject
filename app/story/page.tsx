@@ -28,9 +28,10 @@ export default function HomePage() {
           <div className="liquid-glass rounded-full max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Globe className="w-6 h-6 text-white" />
-              <span className="text-white font-semibold text-lg tracking-tight">EcoChainAI</span>
+              <Link href="/" className="text-white font-semibold text-lg tracking-tight hover:text-white/80 transition-colors">EcoChainAI</Link>
               
               <div className="hidden md:flex items-center gap-8 ml-8">
+                <Link href="/" className="text-white/80 hover:text-white text-sm font-medium transition-colors">Back to Network</Link>
                 <a href="#about" className="text-white/80 hover:text-white text-sm font-medium transition-colors">The Crisis</a>
                 <a href="#approach" className="text-white/80 hover:text-white text-sm font-medium transition-colors">Approach</a>
                 <a href="#technology" className="text-white/80 hover:text-white text-sm font-medium transition-colors">Technology</a>
