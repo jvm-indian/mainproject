@@ -54,7 +54,6 @@ export default function HomePage() {
               <AnimatedHeading 
                 text={"Intelligent recovery\nfor a circular tomorrow."}
                 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-4"
-                style={{ letterSpacing: '-0.04em' }}
               />
               
               <FadeIn delay={800} duration={1000}>
