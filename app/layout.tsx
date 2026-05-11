@@ -2,13 +2,10 @@ import type { Metadata, Viewport } from 'next'
 
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
-// Fonts removed due to Vercel build fetch error
-const inter = { variable: 'font-inter' }
-const spaceGrotesk = { variable: 'font-space-grotesk' }
 
 export const metadata: Metadata = {
-  title: 'TechEd Research Hub | Engineering Education Platform',
-  description: 'Advanced engineering education platform with AI assistance, research articles, tech news, and guide-student collaboration',
+  title: 'VEX | Shaping tomorrow with vision and action',
+  description: 'We back visionaries and craft ventures that define what comes next.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -30,13 +27,12 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: '#0f172a',
+  themeColor: '#000000',
   width: 'device-width',
   initialScale: 1,
 }
 
 import { CustomCursor } from '@/components/ui/custom-cursor'
-import { NoiseOverlay } from '@/components/ui/noise-overlay'
 import { SmoothScroll } from '@/components/ui/smooth-scroll'
 
 export default function RootLayout({
@@ -45,9 +41,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark bg-background">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-background text-foreground cursor-none`}>
-        <NoiseOverlay />
+    <html lang="en" className="dark bg-black">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+      </head>
+      <body className={`font-sans antialiased bg-black text-white cursor-none`}>
         <CustomCursor />
         <SmoothScroll>
           {children}
