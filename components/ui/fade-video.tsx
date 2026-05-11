@@ -6,7 +6,7 @@ interface FadeVideoProps extends React.VideoHTMLAttributes<HTMLVideoElement> {}
 
 export function FadeVideo(props: FadeVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const fadeRef = useRef<number>();
+  const fadeRef = useRef<number | null>(null);
 
   useEffect(() => {
     const video = videoRef.current;
