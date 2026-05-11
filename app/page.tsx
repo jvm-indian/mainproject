@@ -23,22 +23,24 @@ export default function HomePage() {
           <div className="liquid-glass rounded-xl px-4 py-2 flex items-center justify-between">
             {/* Logo */}
             <div className="text-2xl font-semibold tracking-tight">
-              VEX
+              EcoChainAI
             </div>
             
             {/* Links (Hidden on mobile) */}
             <div className="hidden md:flex items-center gap-8 text-sm">
-              <Link href="#" className="hover:text-gray-300 transition-colors">Story</Link>
-              <Link href="#" className="hover:text-gray-300 transition-colors">Investing</Link>
-              <Link href="#" className="hover:text-gray-300 transition-colors">Building</Link>
-              <Link href="#" className="hover:text-gray-300 transition-colors">Advisory</Link>
+              <Link href="/dashboard" className="hover:text-gray-300 transition-colors">Dashboard</Link>
+              <Link href="#" className="hover:text-gray-300 transition-colors">Technology</Link>
+              <Link href="#" className="hover:text-gray-300 transition-colors">Impact</Link>
+              <Link href="#" className="hover:text-gray-300 transition-colors">Network</Link>
             </div>
 
             {/* CTA Button */}
             <div>
-              <button className="bg-white text-black px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">
-                Start a Chat
-              </button>
+              <Link href="/auth/login">
+                <button className="bg-white text-black px-6 py-2 rounded-lg text-sm font-medium hover:bg-gray-100 transition-colors">
+                  Login to Portal
+                </button>
+              </Link>
             </div>
           </div>
         </nav>
@@ -50,24 +52,26 @@ export default function HomePage() {
             {/* Left Column */}
             <div className="w-full">
               <AnimatedHeading 
-                text={"Shaping tomorrow\nwith vision and action."}
+                text={"Intelligent recovery\nfor a circular tomorrow."}
                 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-normal mb-4"
                 style={{ letterSpacing: '-0.04em' }}
               />
               
               <FadeIn delay={800} duration={1000}>
                 <p className="text-base md:text-lg text-gray-300 mb-5 max-w-xl">
-                  We back visionaries and craft ventures that define what comes next.
+                  We empower institutions to automatically segregate, track, and monetize waste at the source using AI & IoT.
                 </p>
               </FadeIn>
               
               <FadeIn delay={1200} duration={1000}>
                 <div className="flex flex-wrap gap-4">
-                  <button className="bg-white text-black px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                    Start a Chat
-                  </button>
+                  <Link href="/dashboard">
+                    <button className="bg-white text-black px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
+                      Open Dashboard
+                    </button>
+                  </Link>
                   <button className="liquid-glass border border-white/20 text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-black transition-colors">
-                    Explore Now
+                    Explore Network
                   </button>
                 </div>
               </FadeIn>
@@ -78,7 +82,7 @@ export default function HomePage() {
               <FadeIn delay={1400} duration={1000}>
                 <div className="liquid-glass border border-white/20 px-6 py-3 rounded-xl">
                   <span className="text-lg md:text-xl lg:text-2xl font-light">
-                    Investing. Building. Advisory.
+                    AI-Powered. Automated. Transparent.
                   </span>
                 </div>
               </FadeIn>

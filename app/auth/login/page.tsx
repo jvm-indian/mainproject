@@ -1,16 +1,10 @@
 'use client'
 
 import { createClient } from '@/lib/supabase/client'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { Cpu, Loader2, ArrowLeft } from 'lucide-react'
-
-import Image from 'next/image'
+import { ArrowLeft, Loader2 } from 'lucide-react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -41,87 +35,84 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-background relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/10 via-background to-background" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+    <div className="min-h-screen flex items-center justify-center p-6 bg-black text-white font-sans relative overflow-hidden">
+      {/* Background Video (Same as Hero for consistency) */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-30"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260403_050628_c4e32401-fab4-4a27-b7a8-6e9291cd5959.mp4"
+      />
 
       <div className="w-full max-w-md relative z-10">
-        {/* Back Button */}
-        <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors">
+        <Link href="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-8 transition-colors text-sm">
           <ArrowLeft className="w-4 h-4" />
-          Back to home
+          Back to network
         </Link>
 
-        <Card className="bg-card/80 backdrop-blur-xl border-border/50 shadow-2xl shadow-primary/5">
-          <CardHeader className="text-center pt-8">
-            <div className="flex justify-center mb-6">
-              <div className="relative w-32 h-32 flex items-center justify-center p-2 rounded-2xl bg-white shadow-xl shadow-black/20 border border-white/10">
-                <Image 
-                  src="/bg-logo.png" 
-                  alt="SJBIT Logo" 
-                  width={120} 
-                  height={120} 
-                  className="object-contain"
-                  priority
-                />
-              </div>
+        <div className="liquid-glass border border-white/20 p-8 sm:p-10 rounded-2xl shadow-2xl">
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-semibold tracking-tight mb-2">EcoChainAI</h1>
+            <p className="text-gray-400 text-sm">Access your institutional intelligence dashboard</p>
+          </div>
+          
+          <form onSubmit={handleLogin} className="flex flex-col gap-6">
+            <div className="grid gap-2">
+              <label htmlFor="email" className="text-sm font-medium text-gray-300">Email Address</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="institution@network.com"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-white/50 transition-shadow"
+              />
             </div>
-            <CardTitle className="text-3xl font-bold tracking-tight">Welcome Back</CardTitle>
-            <CardDescription className="text-base mt-2">Sign in to your TechEd Hub account</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleLogin}>
-              <div className="flex flex-col gap-5">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-input border-border"
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    type="password"
-                    required
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="bg-input border-border"
-                  />
-                </div>
-                {error && (
-                  <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
-                    <p className="text-sm text-destructive">{error}</p>
-                  </div>
-                )}
-                <Button type="submit" className="w-full bg-primary hover:bg-primary/90" disabled={isLoading}>
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Signing in...
-                    </>
-                  ) : (
-                    'Sign In'
-                  )}
-                </Button>
+            
+            <div className="grid gap-2">
+              <label htmlFor="password" className="text-sm font-medium text-gray-300">Password</label>
+              <input
+                id="password"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-1 focus:ring-white/50 transition-shadow"
+              />
+            </div>
+
+            {error && (
+              <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-center">
+                <p className="text-sm text-red-400">{error}</p>
               </div>
-              <div className="mt-6 text-center text-sm text-muted-foreground">
-                Don&apos;t have an account?{' '}
-                <Link href="/auth/sign-up" className="text-primary hover:underline underline-offset-4">
-                  Sign up
-                </Link>
-              </div>
-            </form>
-          </CardContent>
-        </Card>
+            )}
+
+            <button 
+              type="submit" 
+              className="w-full bg-white text-black font-medium hover:bg-gray-200 transition-colors rounded-lg py-3 mt-2 flex items-center justify-center"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Authenticating...
+                </>
+              ) : (
+                'Secure Login'
+              )}
+            </button>
+
+            <div className="text-center text-sm text-gray-500 mt-2">
+              Don't have an account?{' '}
+              <Link href="/auth/sign-up" className="text-white hover:underline underline-offset-4">
+                Request Access
+              </Link>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )
