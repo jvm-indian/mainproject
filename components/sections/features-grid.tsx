@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
 import { useRef } from 'react';
 
-const ease = [0.22, 1, 0.36, 1];
+const ease = [0.22, 1, 0.36, 1] as const;
 
 interface CardProps {
   children: React.ReactNode;
