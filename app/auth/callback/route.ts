@@ -8,9 +8,18 @@ export async function GET(request: NextRequest) {
 
   if (code) {
     const supabase = await createClient()
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
+    
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+      // Dynamic RBAC Routing
+      let targetPath = next;
+      if (next === '/dashboard' || next === '/') {
+        const role = data.user?.user_metadata?.role || 'institution';
+        if (role === 'admin') targetPath = '/admin-dashboard';
+        else if (role === 'shg_worker') targetPath = '/worker-home';
+        else targetPath = '/institution-dashboard';
+      }
+      return NextResponse.redirect(`${origin}${targetPath}`)
     }
   }
 
