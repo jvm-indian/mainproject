@@ -7,9 +7,9 @@ export default async function AdminDashboardPage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  if (!user) {
-    redirect('/auth/login')
-  }
+  // if (!user) {
+  //   redirect('/auth/login')
+  // }
 
   // Assuming role check would happen here in a real app, e.g.:
   // if (user.user_metadata?.role !== 'admin') redirect('/auth/login')

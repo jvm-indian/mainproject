@@ -33,6 +33,7 @@ export default function HomePage() {
             <div className="hidden md:flex items-center gap-8 text-sm">
               <a href="#dashboard" className="hover:text-gray-300 transition-colors">Dashboard</a>
               <Link href="/story" className="text-white hover:text-gray-300 transition-colors font-semibold">Story</Link>
+              <Link href="/products" className="text-white hover:text-gray-300 transition-colors font-semibold text-green-400">Marketplace</Link>
               <a href="#rankings" className="hover:text-gray-300 transition-colors">Rankings</a>
               <a href="#technology" className="hover:text-gray-300 transition-colors">Technology</a>
               <a href="#impact" className="hover:text-gray-300 transition-colors">Impact</a>
