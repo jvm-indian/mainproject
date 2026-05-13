@@ -72,21 +72,22 @@ export default function LoginPage() {
         const demoPassword = `PhoneAuth!234`
 
         // Try to sign in first
-        let res = await supabase.auth.signInWithPassword({
+        let signInRes = await supabase.auth.signInWithPassword({
           email: demoEmail,
           password: demoPassword,
         })
 
         // If user doesn't exist, sign them up on the fly to grant a session
-        if (res.error && res.error.message.includes('Invalid login credentials')) {
-          res = await supabase.auth.signUp({
+        if (signInRes.error && signInRes.error.message.includes('Invalid login credentials')) {
+          const signUpRes = await supabase.auth.signUp({
             email: demoEmail,
             password: demoPassword,
             options: { data: { role: 'shg_worker', full_name: `Worker ${phone}` } }
           })
+          if (signUpRes.error) throw signUpRes.error
+        } else if (signInRes.error) {
+          throw signInRes.error
         }
-
-        if (res.error) throw res.error
         
         router.push('/worker-home')
         router.refresh()
