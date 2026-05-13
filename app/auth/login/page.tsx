@@ -58,31 +58,41 @@ export default function LoginPage() {
 
     try {
       if (!otpSent) {
-        // Send OTP
-        const { error } = await supabase.auth.signInWithOtp({
-          phone: `+91${phone}`, // Assuming India for SHG context
-        })
-        if (error) throw error
+        // Send OTP - DEMO SIMULATION
+        // We skip calling Supabase SMS to avoid paid provider requirement
         setOtpSent(true)
+        setError("Demo Mode: SMS simulated. Please enter OTP 123456 to continue.")
       } else {
-        // Verify OTP
-        const { data, error } = await supabase.auth.verifyOtp({
-          phone: `+91${phone}`,
-          token: otp,
-          type: 'sms',
+        // Verify OTP - DEMO SIMULATION
+        if (otp !== '123456') {
+          throw new Error('Invalid OTP. Please use 123456 for the demo.')
+        }
+        
+        const demoEmail = `phone_${phone}@ecochain.com`
+        const demoPassword = `PhoneAuth!234`
+
+        // Try to sign in first
+        let res = await supabase.auth.signInWithPassword({
+          email: demoEmail,
+          password: demoPassword,
         })
-        if (error) throw error
+
+        // If user doesn't exist, sign them up on the fly to grant a session
+        if (res.error && res.error.message.includes('Invalid login credentials')) {
+          res = await supabase.auth.signUp({
+            email: demoEmail,
+            password: demoPassword,
+            options: { data: { role: 'shg_worker', full_name: `Worker ${phone}` } }
+          })
+        }
+
+        if (res.error) throw res.error
         
-        // RBAC Routing
-        const role = data.user?.user_metadata?.role || 'shg_worker' // Default phone users to worker
-        if (role === 'admin') router.push('/admin-dashboard')
-        else if (role === 'institution') router.push('/institution-dashboard')
-        else router.push('/worker-home')
-        
+        router.push('/worker-home')
         router.refresh()
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'An error occurred or SMS provider not configured')
+      setError(err instanceof Error ? err.message : 'An error occurred during phone auth')
     } finally {
       setIsLoading(false)
     }

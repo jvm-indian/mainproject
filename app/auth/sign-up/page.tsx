@@ -10,7 +10,8 @@ export default function SignUpPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [institutionName, setInstitutionName] = useState('')
+  const [displayName, setDisplayName] = useState('')
+  const [role, setRole] = useState('institution')
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
@@ -42,8 +43,8 @@ export default function SignUpPage() {
             process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ??
             `${window.location.origin}/auth/callback`,
           data: {
-            full_name: institutionName,
-            role: 'institution', // hardcode to EcoChainAI role
+            full_name: displayName,
+            role: role,
           },
         },
       })
@@ -80,19 +81,36 @@ export default function SignUpPage() {
               <Globe className="w-10 h-10 text-white" />
             </div>
             <h1 className="text-3xl font-semibold tracking-tight mb-2">Join the Network</h1>
-            <p className="text-gray-400 text-sm">Deploy intelligent infrastructure for your institution</p>
+            <p className="text-gray-400 text-sm">Register as an Admin, Worker, or Institution</p>
           </div>
           
           <form onSubmit={handleSignUp} className="flex flex-col gap-5">
             <div className="grid gap-2">
-              <label htmlFor="institutionName" className="text-sm font-medium text-gray-300">Institution Name</label>
-              <input
-                id="institutionName"
-                type="text"
-                placeholder="e.g. City University"
+              <label htmlFor="role" className="text-sm font-medium text-gray-300">Account Type</label>
+              <select
+                id="role"
                 required
-                value={institutionName}
-                onChange={(e) => setInstitutionName(e.target.value)}
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-1 focus:ring-white/50 transition-shadow appearance-none"
+              >
+                <option value="institution">Institution (School/Corporate)</option>
+                <option value="shg_worker">SHG Worker (Green Technician)</option>
+                <option value="admin">System Admin</option>
+              </select>
+            </div>
+
+            <div className="grid gap-2">
+              <label htmlFor="displayName" className="text-sm font-medium text-gray-300">
+                {role === 'institution' ? 'Institution Name' : 'Full Name'}
+              </label>
+              <input
+                id="displayName"
+                type="text"
+                placeholder={role === 'institution' ? "e.g. City University" : "e.g. Rajesh Kumar"}
+                required
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
                 className="bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-white/50 transition-shadow"
               />
             </div>

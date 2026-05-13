@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { LiveHeatmap } from '@/components/ecochain/live-heatmap'
+import { PickupApprovals } from '@/components/ecochain/pickup-approvals'
 import { LogOut, Activity, Users, Leaf, Battery, MapPin, CheckCircle2, ShieldAlert, Cpu } from 'lucide-react'
 
 export default async function AdminDashboardPage() {
@@ -113,32 +114,43 @@ export default async function AdminDashboardPage() {
             </div>
           </div>
 
-          {/* User Management */}
+          {/* User & Pickup Management */}
           <div className="liquid-glass rounded-2xl p-6 md:p-8 border border-white/5">
             <h2 className="text-xl font-medium tracking-tight mb-6 flex items-center gap-2">
-              <Users className="w-5 h-5 text-gray-400" /> Pending Approvals
+              <Users className="w-5 h-5 text-gray-400" /> Pending Admin Approvals
             </h2>
-            <div className="space-y-4">
-              {[
-                { name: 'Rajesh K.', type: 'SHG Worker', zone: 'South Zone' },
-                { name: 'SJB Institute', type: 'Institution', zone: 'West Zone' },
-                { name: 'Lakshmi M.', type: 'SHG Worker', zone: 'East Zone' },
-              ].map((user, i) => (
-                <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-black/40 border border-white/5">
-                  <div className="flex flex-col">
-                    <span className="font-medium text-sm">{user.name}</span>
-                    <span className="text-xs text-gray-500">{user.type} • {user.zone}</span>
+            
+            <div className="mb-6">
+              <h3 className="text-sm text-gray-500 uppercase tracking-wider mb-3">Institution Pickup Requests</h3>
+              <PickupApprovals />
+            </div>
+
+            <div className="w-full h-px bg-white/10 my-6"></div>
+
+            <div>
+              <h3 className="text-sm text-gray-500 uppercase tracking-wider mb-3">User Registrations</h3>
+              <div className="space-y-4">
+                {[
+                  { name: 'Rajesh K.', type: 'SHG Worker', zone: 'South Zone' },
+                  { name: 'SJB Institute', type: 'Institution', zone: 'West Zone' },
+                  { name: 'Lakshmi M.', type: 'SHG Worker', zone: 'East Zone' },
+                ].map((user, i) => (
+                  <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-black/40 border border-white/5">
+                    <div className="flex flex-col">
+                      <span className="font-medium text-sm">{user.name}</span>
+                      <span className="text-xs text-gray-500">{user.type} • {user.zone}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-medium transition-colors">
+                        Review
+                      </button>
+                      <button className="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary/80 text-white text-xs font-medium transition-colors flex items-center gap-1">
+                        <CheckCircle2 className="w-3 h-3" /> Approve
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    <button className="px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-medium transition-colors">
-                      Review
-                    </button>
-                    <button className="px-3 py-1.5 rounded-lg bg-primary hover:bg-primary/80 text-white text-xs font-medium transition-colors flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3" /> Approve
-                    </button>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>

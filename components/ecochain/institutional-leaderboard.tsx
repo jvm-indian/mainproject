@@ -15,11 +15,11 @@ interface Institution {
 }
 
 const MOCK_LEADERBOARD: Institution[] = [
-  { id: '1', name: 'Global Tech Park', segregatedWeight: 1450, unsegregatedWeight: 120, score: 92, rank: 1 },
-  { id: '2', name: 'City Hospital', segregatedWeight: 890, unsegregatedWeight: 150, score: 85, rank: 2 },
-  { id: '3', name: 'Sunrise High School', segregatedWeight: 420, unsegregatedWeight: 90, score: 82, rank: 3 },
-  { id: '4', name: 'Downtown Mall', segregatedWeight: 2100, unsegregatedWeight: 800, score: 72, rank: 4 },
-  { id: '5', name: 'Central University', segregatedWeight: 1100, unsegregatedWeight: 550, score: 66, rank: 5 },
+  { id: '1', name: 'CSE A Section', segregatedWeight: 1450, unsegregatedWeight: 120, score: 92, rank: 1 },
+  { id: '2', name: 'ISE B Section', segregatedWeight: 890, unsegregatedWeight: 150, score: 85, rank: 2 },
+  { id: '3', name: 'ECE A Section', segregatedWeight: 420, unsegregatedWeight: 90, score: 82, rank: 3 },
+  { id: '4', name: 'Mechanical B Section', segregatedWeight: 2100, unsegregatedWeight: 800, score: 72, rank: 4 },
+  { id: '5', name: 'Civil A Section', segregatedWeight: 1100, unsegregatedWeight: 550, score: 66, rank: 5 },
 ];
 
 export function InstitutionalLeaderboard() {

@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { InstitutionalLeaderboard } from '@/components/ecochain/institutional-leaderboard'
+import { PickupScheduler } from '@/components/ecochain/pickup-scheduler'
 import { LogOut, Calendar, Download, Building, Leaf, FileText, ArrowUpRight, TrendingUp, Award } from 'lucide-react'
 
 export default async function InstitutionDashboardPage() {
@@ -37,9 +38,11 @@ export default async function InstitutionDashboardPage() {
             <h1 className="text-3xl font-light tracking-tight mb-2">Environmental Impact</h1>
             <p className="text-gray-400">Current Month: May 2026</p>
           </div>
-          <button className="liquid-glass rounded-full px-6 py-2.5 flex items-center gap-2 text-sm font-medium hover:bg-white/10 transition-colors border border-white/10">
-            <Download className="w-4 h-4" /> Download Compliance Certificate
-          </button>
+          <a href="/certificate" target="_blank" rel="noopener noreferrer">
+            <button className="liquid-glass rounded-full px-6 py-2.5 flex items-center gap-2 text-sm font-medium hover:bg-white/10 transition-colors border border-white/10">
+              <Download className="w-4 h-4" /> Download Compliance Certificate
+            </button>
+          </a>
         </div>
 
         {/* Impact Cards */}
@@ -81,32 +84,8 @@ export default async function InstitutionDashboardPage() {
             </div>
           </div>
 
-          {/* Sidebar Column: Actions */}
           <div className="flex flex-col gap-6">
-            <h2 className="text-xl font-medium tracking-tight mb-0 flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-gray-400" /> Pickup Scheduler
-            </h2>
-            <div className="liquid-glass rounded-2xl p-6 border border-white/5 flex flex-col gap-4">
-              <p className="text-sm text-gray-400">Request an immediate ad-hoc pickup outside of your normal schedule.</p>
-              
-              <div className="grid gap-2">
-                <label className="text-xs text-gray-500 uppercase tracking-wider">Date & Time</label>
-                <input type="datetime-local" className="bg-black/50 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/30 w-full" />
-              </div>
-              
-              <div className="grid gap-2">
-                <label className="text-xs text-gray-500 uppercase tracking-wider">Estimated Volume</label>
-                <select className="bg-black/50 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-white/30 w-full appearance-none">
-                  <option>Less than 50 kg</option>
-                  <option>50 kg - 200 kg</option>
-                  <option>Over 200 kg</option>
-                </select>
-              </div>
-
-              <button className="w-full py-3 rounded-lg bg-primary hover:bg-primary/90 text-white font-medium flex items-center justify-center gap-2 mt-2 transition-colors">
-                Request Pickup <ArrowUpRight className="w-4 h-4" />
-              </button>
-            </div>
+            <PickupScheduler institutionName={user.user_metadata?.full_name || 'Your Institution'} />
 
             <div className="liquid-glass rounded-2xl p-6 border border-white/5 flex flex-col gap-4 mt-2">
                <div className="flex items-center gap-3 mb-2">
@@ -116,9 +95,11 @@ export default async function InstitutionDashboardPage() {
                    <p className="text-xs text-gray-500">Auto-generated monthly</p>
                  </div>
                </div>
-               <button className="w-full py-2.5 rounded-lg border border-white/10 hover:bg-white/5 text-white text-sm font-medium transition-colors">
-                 Generate PDF
-               </button>
+               <a href="/certificate" target="_blank" rel="noopener noreferrer" className="block w-full">
+                 <button className="w-full py-2.5 rounded-lg border border-white/10 hover:bg-white/5 text-white text-sm font-medium transition-colors">
+                   Generate PDF
+                 </button>
+               </a>
             </div>
           </div>
         </div>
