@@ -256,31 +256,6 @@ export default function LoginPage() {
             </form>
           )}
 
-          {/* DEMO ACCESS SECTION */}
-          <div className="mt-8 pt-6 border-t border-white/10">
-            <h3 className="text-xs text-gray-500 uppercase tracking-wider text-center mb-4">Demo Quick Access (No Auth Required)</h3>
-            <div className="flex flex-col gap-2">
-              <button 
-                onClick={() => { router.push('/admin-dashboard'); router.refresh(); }}
-                className="w-full py-2 rounded bg-red-500/10 text-red-400 text-sm font-medium hover:bg-red-500/20 transition-colors border border-red-500/20"
-              >
-                Login as System Admin
-              </button>
-              <button 
-                onClick={() => { router.push('/institution-dashboard'); router.refresh(); }}
-                className="w-full py-2 rounded bg-green-500/10 text-green-400 text-sm font-medium hover:bg-green-500/20 transition-colors border border-green-500/20"
-              >
-                Login as Institution
-              </button>
-              <button 
-                onClick={() => { router.push('/worker-home'); router.refresh(); }}
-                className="w-full py-2 rounded bg-blue-500/10 text-blue-400 text-sm font-medium hover:bg-blue-500/20 transition-colors border border-blue-500/20"
-              >
-                Login as SHG Worker
-              </button>
-            </div>
-          </div>
-
           <div className="text-center text-sm text-gray-500 mt-6">
             Don't have an account?{' '}
             <Link href="/auth/sign-up" className="text-white hover:underline underline-offset-4">

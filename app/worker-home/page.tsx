@@ -6,9 +6,9 @@ export default async function WorkerHomePage() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  // if (!user) {
-  //   redirect('/auth/login')
-  // }
+  if (!user) {
+    redirect('/auth/login')
+  }
 
   return (
     <main className="min-h-screen bg-black text-white font-sans pb-24 md:hidden">

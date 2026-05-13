@@ -51,10 +51,16 @@ export async function updateSession(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // Redirect logged in users away from auth pages
-  if (user && request.nextUrl.pathname.startsWith('/auth/')) {
+  // Redirect logged in users away from auth pages (BUT EXCLUDE /auth/logout which they need to sign out!)
+  if (user && request.nextUrl.pathname.startsWith('/auth/') && request.nextUrl.pathname !== '/auth/logout') {
     const url = request.nextUrl.clone()
-    url.pathname = '/dashboard'
+    
+    // RBAC Routing from Middleware
+    const role = user.user_metadata?.role || 'institution';
+    if (role === 'admin') url.pathname = '/admin-dashboard';
+    else if (role === 'shg_worker') url.pathname = '/worker-home';
+    else url.pathname = '/institution-dashboard';
+    
     return NextResponse.redirect(url)
   }
 
