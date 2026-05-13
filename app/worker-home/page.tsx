@@ -11,9 +11,7 @@ export default async function WorkerHomePage() {
   }
 
   return (
-    <main className="min-h-screen bg-black text-white font-sans pb-24 md:hidden">
-      {/* Note: This page is explicitly designed for mobile (md:hidden prevents desktop styling focus, though we can show it on desktop too, we'll optimize for mobile layout) */}
-      
+    <main className="min-h-screen bg-black text-white font-sans pb-24 max-w-md mx-auto relative sm:border-x sm:border-white/10 sm:shadow-2xl shadow-primary/10">
       {/* Top Bar */}
       <nav className="w-full px-4 pt-6 pb-4 bg-gradient-to-b from-black to-transparent sticky top-0 z-50">
         <div className="flex items-center justify-between">
@@ -100,15 +98,6 @@ export default async function WorkerHomePage() {
           </div>
         </div>
 
-      </div>
-      
-      {/* Desktop warning if viewed on large screen */}
-      <div className="hidden md:flex fixed inset-0 bg-black/90 z-[100] items-center justify-center p-8 text-center backdrop-blur-sm">
-        <div className="max-w-md liquid-glass p-8 rounded-2xl">
-          <Navigation className="w-12 h-12 text-primary mx-auto mb-4" />
-          <h2 className="text-2xl font-bold mb-2">Mobile Interface</h2>
-          <p className="text-gray-400">The SHG Worker dashboard is explicitly designed for mobile devices. Please shrink your window or use a mobile device for the intended experience.</p>
-        </div>
       </div>
     </main>
   )
