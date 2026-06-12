@@ -5,15 +5,30 @@ LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public
 AS $$
+DECLARE
+  mapped_role user_role;
+  raw_role text;
 BEGIN
-  INSERT INTO public.profiles (id, email, full_name, role)
+  raw_role := (new.raw_user_meta_data ->> 'role')::text;
+  
+  IF raw_role = 'admin' THEN
+    mapped_role := 'Admin'::user_role;
+  ELSIF raw_role = 'institution' THEN
+    mapped_role := 'Institution'::user_role;
+  ELSIF raw_role = 'shg_worker' THEN
+    mapped_role := 'SHG_Worker'::user_role;
+  ELSE
+    mapped_role := 'SHG_Worker'::user_role;
+  END IF;
+
+  INSERT INTO public.users (id, email, name, role)
   VALUES (
     new.id,
     new.email,
     COALESCE(new.raw_user_meta_data ->> 'full_name', split_part(new.email, '@', 1)),
-    COALESCE((new.raw_user_meta_data ->> 'role')::user_role, 'student')
+    mapped_role
   )
-  ON CONFLICT (id) DO NOTHING;
+  ON CONFLICT (email) DO UPDATE SET id = new.id;
 
   RETURN new;
 END;

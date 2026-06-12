@@ -2,7 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { InstitutionalLeaderboard } from '@/components/ecochain/institutional-leaderboard'
 import { PickupScheduler } from '@/components/ecochain/pickup-scheduler'
-import { LogOut, Calendar, Download, Building, Leaf, FileText, ArrowUpRight, TrendingUp, Award } from 'lucide-react'
+import { AssignedSHGs } from '@/components/ecochain/assigned-shgs'
+import { LogOut, Calendar, Download, Building, Leaf, FileText, ArrowUpRight, TrendingUp, Award, Users } from 'lucide-react'
 
 export default async function InstitutionDashboardPage() {
   const supabase = await createClient()
@@ -71,6 +72,14 @@ export default async function InstitutionDashboardPage() {
               <div className="bg-primary h-1.5 rounded-full" style={{ width: '90.4%' }}></div>
             </div>
           </div>
+        </div>
+
+        {/* Assigned SHG Workers */}
+        <div className="mb-12">
+          <h2 className="text-xl font-medium tracking-tight mb-6 flex items-center gap-2">
+            <Users className="w-5 h-5 text-gray-400" /> Allotted Green Technicians
+          </h2>
+          <AssignedSHGs userId={user.id} />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -2,7 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { LiveHeatmap } from '@/components/ecochain/live-heatmap'
 import { PickupApprovals } from '@/components/ecochain/pickup-approvals'
-import { LogOut, Activity, Users, Leaf, Battery, MapPin, CheckCircle2, ShieldAlert, Cpu } from 'lucide-react'
+import { SHGAllotment } from '@/components/ecochain/shg-allotment'
+import { LogOut, Activity, Users, Leaf, Battery, MapPin, CheckCircle2, ShieldAlert, Cpu, Link2 } from 'lucide-react'
 
 export default async function AdminDashboardPage() {
   const supabase = await createClient()
@@ -14,6 +15,17 @@ export default async function AdminDashboardPage() {
 
   // Assuming role check would happen here in a real app, e.g.:
   // if (user.user_metadata?.role !== 'admin') redirect('/auth/login')
+
+  // Fetch users for allotment
+  const { data: shgs } = await supabase
+    .from('users')
+    .select('id, name, email, role')
+    .eq('role', 'SHG_Worker')
+
+  const { data: campuses } = await supabase
+    .from('users')
+    .select('id, name, email, role')
+    .eq('role', 'Institution')
 
   return (
     <main className="min-h-screen bg-black text-white font-sans pb-24">
@@ -151,6 +163,16 @@ export default async function AdminDashboardPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="w-full h-px bg-white/10 my-6"></div>
+
+            <div>
+              <h3 className="text-sm text-gray-500 uppercase tracking-wider mb-3 flex items-center gap-2">
+                <Link2 className="w-4 h-4" /> SHG to Campus Allotment
+              </h3>
+              <p className="text-xs text-gray-400">Assign registered SHG workers to specific campuses. This enables communication between them.</p>
+              <SHGAllotment shgs={shgs || []} campuses={campuses || []} />
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import { LogOut, Map, QrCode, Wallet, Award, MapPin, BellRing, Navigation } from 'lucide-react'
+import { AssignedCampus } from '@/components/ecochain/assigned-campus'
 
 export default async function WorkerHomePage() {
   const supabase = await createClient()
@@ -39,6 +40,9 @@ export default async function WorkerHomePage() {
           <button className="flex-1 py-2 rounded-lg bg-white/10 text-gray-400 text-xs font-bold hover:bg-white/20">ಕನ್ನಡ</button>
           <button className="flex-1 py-2 rounded-lg bg-white/10 text-gray-400 text-xs font-bold hover:bg-white/20">हिंदी</button>
         </div>
+
+        {/* Assigned Campus Section */}
+        <AssignedCampus userId={user.id} />
 
         {/* Daily Task Card */}
         <div className="rounded-2xl p-5 bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 relative overflow-hidden">

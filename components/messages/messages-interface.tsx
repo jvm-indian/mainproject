@@ -26,10 +26,9 @@ import {
 
 interface Profile {
   id: string
-  full_name: string | null
+  name: string | null
   email: string | null
   role: string | null
-  avatar_url: string | null
 }
 
 interface Conversation {
@@ -173,8 +172,8 @@ export function MessagesInterface({ currentUserId, conversations: initialConvers
       })
       .select(`
         *,
-        participant_1_profile:profiles!participant_1(id, full_name, email, role, avatar_url),
-        participant_2_profile:profiles!participant_2(id, full_name, email, role, avatar_url)
+        participant_1_profile:users!participant_1(id, name, email, role),
+        participant_2_profile:users!participant_2(id, name, email, role)
       `)
       .single()
 
@@ -209,7 +208,7 @@ export function MessagesInterface({ currentUserId, conversations: initialConvers
   }
 
   const filteredUsers = allUsers.filter(user => 
-    user.full_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
     user.email?.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
@@ -247,14 +246,13 @@ export function MessagesInterface({ currentUserId, conversations: initialConvers
                           className="w-full flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors text-left"
                         >
                           <Avatar className="w-10 h-10">
-                            <AvatarImage src={user.avatar_url || undefined} />
                             <AvatarFallback>
-                              {user.full_name?.charAt(0) || user.email?.charAt(0) || 'U'}
+                              {user.name?.charAt(0) || user.email?.charAt(0) || 'U'}
                             </AvatarFallback>
                           </Avatar>
                           <div className="flex-1 min-w-0">
                             <p className="font-medium text-foreground truncate">
-                              {user.full_name || user.email}
+                              {user.name || user.email}
                             </p>
                             <div className="flex items-center gap-1 text-xs text-muted-foreground">
                               {getRoleIcon(user.role)}
@@ -288,14 +286,13 @@ export function MessagesInterface({ currentUserId, conversations: initialConvers
                     )}
                   >
                     <Avatar className="w-10 h-10">
-                      <AvatarImage src={other.avatar_url || undefined} />
                       <AvatarFallback>
-                        {other.full_name?.charAt(0) || other.email?.charAt(0) || 'U'}
+                        {other.name?.charAt(0) || other.email?.charAt(0) || 'U'}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1 min-w-0">
                       <p className="font-medium text-foreground truncate">
-                        {other.full_name || other.email}
+                        {other.name || other.email}
                       </p>
                       <div className="flex items-center justify-between gap-2">
                         <span className={cn(
@@ -331,14 +328,13 @@ export function MessagesInterface({ currentUserId, conversations: initialConvers
             {/* Chat Header */}
             <div className="h-16 border-b border-border bg-card/50 flex items-center px-4 gap-3">
               <Avatar className="w-10 h-10">
-                <AvatarImage src={getOtherParticipant(selectedConversation).avatar_url || undefined} />
                 <AvatarFallback>
-                  {getOtherParticipant(selectedConversation).full_name?.charAt(0) || 'U'}
+                  {getOtherParticipant(selectedConversation).name?.charAt(0) || 'U'}
                 </AvatarFallback>
               </Avatar>
               <div>
                 <p className="font-medium text-foreground">
-                  {getOtherParticipant(selectedConversation).full_name || getOtherParticipant(selectedConversation).email}
+                  {getOtherParticipant(selectedConversation).name || getOtherParticipant(selectedConversation).email}
                 </p>
                 <p className="text-xs text-muted-foreground capitalize flex items-center gap-1">
                   {getRoleIcon(getOtherParticipant(selectedConversation).role)}
