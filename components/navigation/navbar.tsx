@@ -16,13 +16,10 @@ interface NavbarProps {
 
 const publicLinks = [
   { href: '/', label: 'Home', icon: Cpu },
-  { href: '/news', label: 'Tech News', icon: Newspaper },
-  { href: '/research', label: 'Research', icon: BookOpen },
 ]
 
 const authLinks = [
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/ai-assistant', label: 'AI Assistant', icon: Bot },
+  { href: '/admin-dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/messages', label: 'Messages', icon: MessageSquare },
 ]
 
@@ -49,7 +46,7 @@ export function Navbar({ user }: NavbarProps) {
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Cpu className="w-6 h-6 text-white" />
             </div>
-            <span className="font-bold text-xl hidden sm:block">TechEd Hub</span>
+            <span className="font-bold text-xl hidden sm:block">EcoChainAI</span>
           </Link>
 
           {/* Desktop Navigation */}
